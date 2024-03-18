@@ -1,35 +1,30 @@
-# Use a base image with JDK, Maven, and Kafka installed
-FROM maven:3-openjdk-17 AS build
-WORKDIR /target
+# Use a base image with JDK and Maven to build the application
+FROM maven:3.8.4-openjdk-17-slim AS builder
 
-# Copy the Maven project file
+# Set the working directory in the container
+WORKDIR /Kafka-Backend
+
+# Copy the Maven project file and download the dependencies
 COPY pom.xml .
-
-# Download dependencies
-RUN mvn -B -f pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:resolve
+RUN mvn -B dependency:go-offline
 
 # Copy the application source code
-COPY src ./src
+COPY . .
 
 # Build the application
-RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml clean package
+RUN mvn -B package -DskipTests
 
-# Use a lightweight base image with JRE, Kafka, and Zookeeper
-FROM openjdk:17.0.1-jdk-slim 
-RUN apt-get update && apt-get install -y wget \
-    && wget -q https://downloads.apache.org/kafka/3.0.0/kafka_2.13-3.0.0.tgz \
-    && tar -xzf kafka_2.13-3.0.0.tgz \
-    && rm kafka_2.13-3.0.0.tgz
-WORKDIR /kafka_2.13-3.0.0
+# Use a lightweight base image with JRE to run the application
+FROM adoptopenjdk:17-jre-hotspot
 
-# Copy Kafka configurations
-COPY kafka.properties ./config/server.properties
+# Set the working directory in the container
+WORKDIR /Kafka-Backend
 
-# Set the working directory
-WORKDIR /app
+# Copy the built JAR file from the builder stage
+COPY --from=builder /app/target/Kafka-Backend.jar ./Kafka-Backend.jar
 
-# Copy the packaged JAR file from the build stage
-COPY --from=build app/target/Kafka-Backend.jar ./Kafka-Backend.jar
+# Expose the port your application runs on
+EXPOSE 8080
 
 # Specify the command to run your application
-CMD ["java", "-jar", "Kafka-Backend.jar"]
+CMD ["java", "-jar", "app.jar"]
