@@ -1,18 +1,35 @@
-#Buildinng the image
+# Use a base image with JDK, Maven, and Kafka installed
 FROM maven:3-openjdk-17 AS build
+WORKDIR /target
 
-#Copy all the codes..
-COPY . .
+# Copy the Maven project file
+COPY pom.xml .
 
-#Container used to build the code
-RUN mvn clean package -DskipTests
-#Create a new container for running the application
+# Download dependencies
+RUN mvn -B -f pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:resolve
+
+# Copy the application source code
+COPY src ./src
+
+# Build the application
+RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml clean package
+
+# Use a lightweight base image with JRE, Kafka, and Zookeeper
 FROM openjdk:17.0.1-jdk-slim 
+RUN apt-get update && apt-get install -y wget \
+    && wget -q https://downloads.apache.org/kafka/3.0.0/kafka_2.13-3.0.0.tgz \
+    && tar -xzf kafka_2.13-3.0.0.tgz \
+    && rm kafka_2.13-3.0.0.tgz
+WORKDIR /kafka_2.13-3.0.0
 
-COPY --from=build /target/Kafka-Backend-0.0.1-SNAPSHOT.jar Kafka-Backend.jar
+# Copy Kafka configurations
+COPY kafka.properties ./config/server.properties
 
-#Expose the port
-EXPOSE 8080
+# Set the working directory
+WORKDIR /target
 
-#Run the application
-ENTRYPOINT ["java", "-jar", "Kafka-Backend.jar"]
+# Copy the packaged JAR file from the build stage
+COPY --from=build /target/Kafka-Backend.jar ./Kafka-Backend.jar
+
+# Specify the command to run your application
+CMD ["java", "-jar", "Kafka-Backend.jar"]
