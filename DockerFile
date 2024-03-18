@@ -15,4 +15,4 @@ COPY --from=build /target/Kafka-Backend-0.0.1-SNAPSHOT.jar Kafka-Backend.jar
 EXPOSE 8080
 
 #Run the application
-CMD ["java","-jar","/Kafka-Backend.jar"]
+ENTRYPOINT ["java", "-jar", "Kafka-Backend.jar"]
