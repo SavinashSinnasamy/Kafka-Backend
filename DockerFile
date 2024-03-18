@@ -1,0 +1,18 @@
+#Buildinng the image
+FROM maven:3-openjdk-17 AS build
+
+#Copy all the codes..
+COPY . .
+
+#Container used to build the code
+RUN mvn clean package -DskipTests
+#Create a new container for running the application
+FROM openjdk:17.0.1-jdk-slim 
+
+COPY --from=build /target/Kafka-Backend-0.0.1-SNAPSHOT.jar Kafka-Backend.jar
+
+#Expose the port
+EXPOSE 8080
+
+#Run the application
+ENTRYPOINT ["java", "-jar", "Kafka-Backend.jar"]
