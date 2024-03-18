@@ -32,4 +32,4 @@ WORKDIR /app
 COPY --from=build app/target/Kafka-Backend.jar ./Kafka-Backend.jar
 
 # Specify the command to run your application
-ENTRYPOINT ["java", "-jar", "Kafka-Backend.jar"]
+CMD ["java", "-jar", "Kafka-Backend.jar"]
