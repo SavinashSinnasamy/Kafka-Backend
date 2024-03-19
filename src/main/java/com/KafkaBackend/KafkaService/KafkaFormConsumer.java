@@ -17,11 +17,11 @@ public class KafkaFormConsumer {
 
     @KafkaListener(topics = "FormFlexaUserDetails", groupId = "requestingBanks" )
     public void getFormDetails(FormObject form) {
-        Scanner input = new Scanner(System.in);
         String lowerCaseValue;
         boolean loop = true;
         while (loop){
             System.out.print("\nEnter Form ID : ");
+            Scanner input = new Scanner(System.in);
             String idNo = input.next();
             if (idNo.equals(form.getFormId())) {
                 LOGGER.info(String.format("\n\n" +

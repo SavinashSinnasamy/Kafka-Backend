@@ -13,8 +13,6 @@ public class FormObject {
     private boolean capitalSaving;
     private boolean otherSaving;
     private boolean addPhoneEmail;
-    private boolean statementTypeAcc;
-    private boolean passbookTypeAcc;
     private boolean online_MobileBanking;
     private boolean sriLankanCitizenship;
     private boolean otherCitizenship;
@@ -108,7 +106,7 @@ public class FormObject {
         this.passportNumber = passportNumber;
     }
 
-    public void setForm(String fullName, String email, String address, String dob, String nic, int mobile, String passportNumber, int age) {
+    public void setForm(String formId,boolean generalSaving, boolean capitalSaving, boolean otherSaving, boolean addPhoneEmail,  String fullName, String email, String address, String dob, String nic, int mobile, String passportNumber, int age) {
         this.fullName = fullName;
         this.email = email;
         this.address = address;
@@ -119,9 +117,10 @@ public class FormObject {
         this.age = age;
     }
 
+
     @Override
     public String toString() {
-        String output = "" , savings = "", accType = "", displayEmail = "";
+        String output = "" , savings = "", displayEmail = "";
         String displayFLName = "", displayAddress = "", displayProfession = "", displayDob = "", displayNic = "";
         String displayAge = "", displaypassportNum = "", dissplayMobile = "", citizenship = "";
         //Checking savings type
@@ -133,12 +132,6 @@ public class FormObject {
             savings ="Other Saving";
         } else {
             savings = "Not Provided";
-        }
-        //Checking Account Type
-        if (passbookTypeAcc){
-            accType = "Passbook Type Account";
-        } else if (statementTypeAcc){
-            accType = "Statement Type Account";
         }
         if(sriLankanCitizenship){
             citizenship = "Sri-Lankan";
@@ -220,8 +213,7 @@ public class FormObject {
                     "PassportNumber", displaypassportNum,
                     "Age", displayAge,
                     "MobileNumber", dissplayMobile,
-                    "Savings Type", savings,
-                    "Account Type", accType);
+                    "Savings Type", savings);
 
         } else {
             output = String.format("FormFlexa User Details:\n" +
@@ -244,8 +236,7 @@ public class FormObject {
                     "Citizenship", citizenship,
                     "PassportNumber", displaypassportNum,
                     "Age", displayAge,
-                    "Savings Type", savings,
-                    "Account Type", accType);
+                    "Savings Type", savings);
         }
         return output;
     }
