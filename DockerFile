@@ -27,4 +27,4 @@ COPY --from=builder /app/target/Kafka-Backend.jar ./Kafka-Backend.jar
 EXPOSE 8080
 
 # Specify the command to run your application
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "Kafka-Backend.jar"]
