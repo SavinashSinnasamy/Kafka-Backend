@@ -1,7 +1,5 @@
 package com.KafkaBackend;
 
-import com.KafkaBackend.KafkaService.KafkaFormConsumer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
