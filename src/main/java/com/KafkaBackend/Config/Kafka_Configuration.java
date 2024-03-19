@@ -28,7 +28,7 @@ public class Kafka_Configuration {
     @Bean
     public ConsumerFactory<String, FormObject> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-broker-container:9092");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "requestingBanks");
         // other consumer properties
         JsonDeserializer<FormObject> deserializer = new JsonDeserializer<>(FormObject.class);
