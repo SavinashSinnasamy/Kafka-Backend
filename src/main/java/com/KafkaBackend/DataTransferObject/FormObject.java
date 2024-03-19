@@ -19,8 +19,6 @@ public class FormObject {
     private boolean sriLankanCitizenship;
     private boolean otherCitizenship;
     private String email;
-    private String firstName;
-    private String lastName;
     private String fullName;
     private String address;
     private String profession;
@@ -46,28 +44,12 @@ public class FormObject {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getFullName() {
         return fullName;
     }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -126,10 +108,8 @@ public class FormObject {
         this.passportNumber = passportNumber;
     }
 
-    public void setForm(String fullName, String firstName, String lastName, String email, String address, String dob, String nic, int mobile, String passportNumber, int age) {
+    public void setForm(String fullName, String email, String address, String dob, String nic, int mobile, String passportNumber, int age) {
         this.fullName = fullName;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.address = address;
         this.dob = dob;
@@ -141,7 +121,7 @@ public class FormObject {
 
     @Override
     public String toString() {
-        String output = "" , savings = "", accType = "", displayEmail = "", displayFName = "", displayLName = "";
+        String output = "" , savings = "", accType = "", displayEmail = "";
         String displayFLName = "", displayAddress = "", displayProfession = "", displayDob = "", displayNic = "";
         String displayAge = "", displaypassportNum = "", dissplayMobile = "", citizenship = "";
         //Checking savings type
@@ -171,16 +151,6 @@ public class FormObject {
             displayEmail = "Not provided";
         } else {
             displayEmail = email;
-        }
-        if(firstName == null){
-            displayFName = "Not provided";
-        } else {
-            displayFName = firstName;
-        }
-        if(lastName == null){
-            displayLName = "Not provided";
-        } else {
-            displayLName = lastName;
         }
         if(fullName == null){
             displayFLName = "Not provided";
@@ -238,13 +208,9 @@ public class FormObject {
                             "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
-                            "  %-15s: %s\n" +
-                            "  %-15s: %s\n" +
                             "  %-15s: %s\n",
                     "Form Id", formId,
                     "Email", displayEmail,
-                    "FirstName", displayFName,
-                    "LastName", displayLName,
                     "FullName", displayFLName,
                     "Address", displayAddress,
                     "Profession", displayProfession,
@@ -268,12 +234,8 @@ public class FormObject {
                             "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
-                            "  %-15s: %s\n" +
-                            "  %-15s: %s\n" +
                             "  %-15s: %s\n",
                     "Form Id", formId,
-                    "FirstName", displayFName,
-                    "LastName", displayLName,
                     "FullName", displayFLName,
                     "Address", displayAddress,
                     "Profession", displayProfession,
