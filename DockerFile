@@ -2,14 +2,14 @@
 FROM maven:3.8.4-openjdk-17-slim AS builder
 
 # Set the working directory in the container
-WORKDIR /Kafka-Backend
+WORKDIR C:/app
 
 # Copy the Maven project file and download the dependencies
 COPY pom.xml .
 RUN mvn -B dependency:go-offline
 
 # Copy the application source code
-COPY . .
+COPY src ./src
 
 # Build the application
 RUN mvn -B package -DskipTests
@@ -18,13 +18,13 @@ RUN mvn -B package -DskipTests
 FROM adoptopenjdk:17-jre-hotspot
 
 # Set the working directory in the container
-WORKDIR /Kafka-Backend
+WORKDIR C:/app
 
 # Copy the built JAR file from the builder stage
-COPY --from=builder /app/target/Kafka-Backend.jar ./Kafka-Backend.jar
+COPY --from=builder C:/app/target/Kafka-Backend.jar ./app.jar
 
 # Expose the port your application runs on
 EXPOSE 8080
 
 # Specify the command to run your application
-CMD ["java", "-jar", "Kafka-Backend.jar"]
+CMD ["java", "-jar", "app.jar"]
