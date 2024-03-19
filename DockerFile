@@ -26,8 +26,5 @@ EXPOSE 9092
 
 CMD ["java","-Xms512m","-Xmx1024m","-jar","Kafka-Backend.jar"]
 
-# Expose the port your application runs on
-#EXPOSE 8080
-
 # Specify the command to run your application
 #CMD ["java", "-jar", "app.jar"]
