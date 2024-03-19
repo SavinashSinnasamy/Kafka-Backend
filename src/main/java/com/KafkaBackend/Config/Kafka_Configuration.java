@@ -32,7 +32,7 @@ public class Kafka_Configuration {
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "requestingBanks");
         // other consumer properties
         JsonDeserializer<FormObject> deserializer = new JsonDeserializer<>(FormObject.class);
-        deserializer.addTrustedPackages("com.KafkaBackend.Config"); // Set trusted packages
+        deserializer.addTrustedPackages("com.KafkaBackend.DataTransferObject"); // Set trusted packages
 
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new ErrorHandlingDeserializer<>(deserializer));
     }
