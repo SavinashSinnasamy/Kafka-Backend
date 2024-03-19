@@ -14,35 +14,35 @@ public class KafkaFormConsumer {
 //Only one instance is created, once a message record is sent it can be read by entering the form id,
     //if the session is terminated and the next form id is entered only the next form can be read. unless it doesn't allow to read other forms.
 // All the forms after the pushed message can be read in a line
+
     @KafkaListener(topics = "FormFlexaUserDetails", groupId = "requestingBanks" )
     public void getFormDetails(FormObject form) {
-        try (Scanner input = new Scanner(System.in)) {
-            String lowerCaseValue;
-            boolean loop = true;
-            while (loop){
-                System.out.print("\nEnter Form ID : ");
-                String idNo = input.next();
-                if (idNo.equals(form.getFormId())) {
-                    LOGGER.info(String.format("\n\n" +
-                                    "\n===================================" +
-                                    "\n\t\tApache Kafka Topic " +
-                                    "\n===================================" +
-                                    "\n%s", form.toString()));
-                    System.out.println("===================================");
-                } else {
-                    System.out.println("No details provided, Check for the form Id and Try Again..");
-                }
-                System.out.print("Do you need to view again ? (y/n) : ");
-                String value = input.next();
-                lowerCaseValue = value.toLowerCase();
-                if(lowerCaseValue.equals("n")){
-                    System.out.println("Kafka Topic server ended..");
-                    loop = false;
+        Scanner input = new Scanner(System.in);
+        String lowerCaseValue;
+        boolean loop = true;
+        while (loop){
+            System.out.print("\nEnter Form ID : ");
+            String idNo = input.next();
+            if (idNo.equals(form.getFormId())) {
+                LOGGER.info(String.format("\n\n" +
+                                "\n===================================" +
+                                "\n\t\tApache Kafka Topic " +
+                                "\n===================================" +
+                                "\n%s", form.toString()));
+                System.out.println("===================================");
+            } else {
+                System.out.println("No details provided, Check for the form Id and Try Again..");
+            }
+            System.out.print("Do you need to view again ? (y/n) : ");
+            String value = input.next();
+            lowerCaseValue = value.toLowerCase();
+            if(lowerCaseValue.equals("n")){
+                System.out.println("Kafka Topic server ended..");
+                loop = false;
 
-                } else if (!lowerCaseValue.equals("y")  ) {
-                    System.out.println("Invalid Input, Try again..");
-                    loop = false;
-                }
+            } else if (!lowerCaseValue.equals("y")  ) {
+                System.out.println("Invalid Input, Try again..");
+                loop = false;
             }
         }
     }
