@@ -4,7 +4,6 @@ import com.KafkaBackend.DataTransferObject.FormObject;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -27,16 +26,14 @@ public class Kafka_Configuration {
     }
 //making all the packages in the project as trusted to serialize and deserialize
 
-    
     @Bean
     public ConsumerFactory<String, FormObject> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
-       // props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, ":9092");
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-broker-container:9092");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "requestingBanks");
         // other consumer properties
         JsonDeserializer<FormObject> deserializer = new JsonDeserializer<>(FormObject.class);
-        deserializer.addTrustedPackages("com.KafkaBackend.Config"); // Set trusted packages
+        deserializer.addTrustedPackages("com.KafkaBackend.DataTransferObject"); // Set trusted packages
 
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new ErrorHandlingDeserializer<>(deserializer));
     }
