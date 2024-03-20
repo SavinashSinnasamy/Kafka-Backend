@@ -11,6 +11,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.support.mapping.DefaultJackson2JavaTypeMapper;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
@@ -20,24 +21,24 @@ import java.util.Map;
 @Configuration
 public class Kafka_Configuration {
 
+    @Bean
+    public NewTopic creatingTopic(){
+        return TopicBuilder.name("FormFlexaUserDetails").build();
+    }
+//making all the packages in the project as trusted to serialize and deserialize
+
     @Value("${kafka.bootstrap.servers}")
     private String bootstrapServers;
 
     @Bean
-    public NewTopic creatingTopic() {
-        return TopicBuilder.name("FormFlexaUserDetails").build();
-    }
-
-    @Bean
     public ConsumerFactory<String, FormObject> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG,"requestingBanks");
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-
+       // props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, ":9092");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "requestingBanks");
         // other consumer properties
         JsonDeserializer<FormObject> deserializer = new JsonDeserializer<>(FormObject.class);
-        deserializer.addTrustedPackages("com.KafkaBackend.DataTransferObject"); // Set trusted packages
+        deserializer.addTrustedPackages("com.KafkaBackend.Config"); // Set trusted packages
 
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new ErrorHandlingDeserializer<>(deserializer));
     }
