@@ -23,7 +23,6 @@ public class Kafka_Configuration {
         return TopicBuilder.name("FormFlexaUserDetails").build();
     }
 //making all the packages in the project as trusted to serialize and deserialize
-
     @Bean
     public ConsumerFactory<String, FormObject> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
@@ -35,7 +34,6 @@ public class Kafka_Configuration {
 
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new ErrorHandlingDeserializer<>(deserializer));
     }
-
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, FormObject> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, FormObject> factory = new ConcurrentKafkaListenerContainerFactory<>();
