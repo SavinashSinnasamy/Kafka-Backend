@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/KafkaForm")
-@ComponentScan(basePackages = "com.KafkaBackend.KafkaService")
+@ComponentScan("com.KafkaBackend.*")
 @CrossOrigin
 public class KafkaFormControls {
     
