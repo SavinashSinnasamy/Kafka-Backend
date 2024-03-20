@@ -27,9 +27,7 @@ public class Kafka_Configuration {
     }
 //making all the packages in the project as trusted to serialize and deserialize
 
-    @Value("${kafka.bootstrap.servers}")
-    private String bootstrapServers;
-
+    
     @Bean
     public ConsumerFactory<String, FormObject> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
