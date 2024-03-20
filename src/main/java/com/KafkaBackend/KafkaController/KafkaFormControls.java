@@ -3,6 +3,7 @@ package com.KafkaBackend.KafkaController;
 import com.KafkaBackend.DataTransferObject.FormObject;
 import com.KafkaBackend.KafkaService.KafkaFormProducer;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/KafkaForm")
-@Configuration
+@ComponentScan(basePackages = "com.KafkaBackend.KafkaService")
 @CrossOrigin
 public class KafkaFormControls {
     
