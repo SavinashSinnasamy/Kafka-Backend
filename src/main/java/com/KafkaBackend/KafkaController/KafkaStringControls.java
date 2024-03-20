@@ -1,7 +1,6 @@
 package com.KafkaBackend.KafkaController;
 
 import com.KafkaBackend.KafkaService.KafkaStringProducer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class KafkaStringControls {
 
     private KafkaStringProducer kafkaService;
-    @Autowired
+    
     public KafkaStringControls(KafkaStringProducer kafkaObject){
         this.kafkaService = kafkaObject;
     }

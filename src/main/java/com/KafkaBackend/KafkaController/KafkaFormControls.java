@@ -2,7 +2,6 @@ package com.KafkaBackend.KafkaController;
 
 import com.KafkaBackend.DataTransferObject.FormObject;
 import com.KafkaBackend.KafkaService.KafkaFormProducer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/KafkaForm")
 @CrossOrigin
 public class KafkaFormControls {
-    @Autowired
+    
+    
     private KafkaFormProducer kafkaFormProducer;
 
-    @Autowired
+
     public KafkaFormControls(KafkaFormProducer kafkaFormProducer) {
         this.kafkaFormProducer = kafkaFormProducer;
     }

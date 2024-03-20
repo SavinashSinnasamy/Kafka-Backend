@@ -1,7 +1,6 @@
 package com.KafkaBackend.KafkaService;
 
 import com.KafkaBackend.DataTransferObject.FormObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -13,7 +12,7 @@ public class KafkaFormProducer {
 
     private KafkaTemplate<String, FormObject> kafkaTemplate;
 
-    @Autowired
+
     public KafkaFormProducer(KafkaTemplate<String, FormObject> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
