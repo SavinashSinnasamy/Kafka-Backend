@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaConfiguration {
+public class Kafka_Configuration {
 
     @Value("${kafka.bootstrap.servers}")
     private String bootstrapServers;
