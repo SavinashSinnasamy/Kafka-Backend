@@ -39,5 +39,6 @@ public class Kafka_Configuration {
         ConcurrentKafkaListenerContainerFactory<String, FormObject> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
+
     }
 }
