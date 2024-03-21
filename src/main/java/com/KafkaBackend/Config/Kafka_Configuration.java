@@ -26,8 +26,8 @@ public class Kafka_Configuration {
     @Bean
     public ConsumerFactory<String, FormObject> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-container-:9092");
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "requestingBanks");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "${KAFKA_BOOTSTRAP_SERVERS}");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "${KAFKA_CONSUMER_GROUP_ID}");
         // other consumer properties
         JsonDeserializer<FormObject> deserializer = new JsonDeserializer<>(FormObject.class);
         deserializer.addTrustedPackages("com.KafkaBackend.Config"); // Set trusted packages

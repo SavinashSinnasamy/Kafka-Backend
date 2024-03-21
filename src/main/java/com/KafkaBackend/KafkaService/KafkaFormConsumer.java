@@ -15,7 +15,7 @@ public class KafkaFormConsumer {
     //if the session is terminated and the next form id is entered only the next form can be read. unless it doesn't allow to read other forms.
 // All the forms after the pushed message can be read in a line
 
-    @KafkaListener(topics = "FormFlexaUserDetails", groupId = "requestingBanks" )
+    @KafkaListener(topics = "FormFlexaUserDetails", groupId = "${KAFKA_CONSUMER_GROUP_ID}" )
     public void getFormDetails(FormObject form) {
         String lowerCaseValue;
         boolean loop = true;
