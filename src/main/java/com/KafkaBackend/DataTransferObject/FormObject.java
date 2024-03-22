@@ -106,7 +106,7 @@ public class FormObject {
         this.passportNumber = passportNumber;
     }
 
-    public void setForm(String formId,boolean generalSaving, boolean capitalSaving, boolean otherSaving, boolean addPhoneEmail,  String fullName, String email, String address, String dob, String nic, int mobile, String passportNumber, int age) {
+    public void setForm(String formId,boolean generalSaving, boolean capitalSaving, boolean otherSaving, boolean addPhoneEmail,  String fullName, String email, String address, String dob, String nic, int mobile, String passportNumber) {
         this.fullName = fullName;
         this.email = email;
         this.address = address;
@@ -114,7 +114,6 @@ public class FormObject {
         this.nic = nic;
         this.mobileNumber = mobile;
         this.passportNumber = passportNumber;
-        this.age = age;
     }
 
 
@@ -175,11 +174,7 @@ public class FormObject {
         } else {
             displaypassportNum = passportNumber;
         }
-        if(age == 0){
-           displayAge = "Not provided";
-        } else {
-            displayAge = String.valueOf(age);
-        }
+        
         if(mobileNumber == 0){
             dissplayMobile = "Not provided";
         } else {
@@ -189,9 +184,6 @@ public class FormObject {
         //Main Printing Details
         if (addPhoneEmail){
             output = String.format("FormFlexa User Details:\n" +
-                            "  %-15s: %s\n" +
-                            "  %-15s: %s\n" +
-                            "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
@@ -211,13 +203,11 @@ public class FormObject {
                     "NIC No", displayNic,
                     "Citizenship", citizenship,
                     "PassportNumber", displaypassportNum,
-                    "Age", displayAge,
                     "MobileNumber", dissplayMobile,
                     "Savings Type", savings);
 
         } else {
             output = String.format("FormFlexa User Details:\n" +
-                            "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
                             "  %-15s: %s\n" +
@@ -235,7 +225,6 @@ public class FormObject {
                     "NIC No", displayNic,
                     "Citizenship", citizenship,
                     "PassportNumber", displaypassportNum,
-                    "Age", displayAge,
                     "Savings Type", savings);
         }
         return output;

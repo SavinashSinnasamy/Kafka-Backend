@@ -3,10 +3,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.KafkaBackend.Config.Kafka_Configuration;
-
 @EnableAutoConfiguration
-@SpringBootApplication(exclude={Kafka_Configuration.class})
+@SpringBootApplication
 public class KafkaBackendApplication {
 
 	public static void main(String[] args) {
