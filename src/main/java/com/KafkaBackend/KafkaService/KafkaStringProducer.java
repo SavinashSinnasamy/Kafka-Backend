@@ -1,3 +1,4 @@
+/*
 package com.KafkaBackend.KafkaService;
 
 import org.slf4j.Logger;
@@ -21,3 +22,4 @@ public class KafkaStringProducer {
         kafkaTemplate.send("FormFlexa_test",Message);
     }
 }
+*/

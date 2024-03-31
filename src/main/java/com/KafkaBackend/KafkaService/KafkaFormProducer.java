@@ -18,9 +18,6 @@ public class KafkaFormProducer {
     
     @Autowired
     private KafkaTemplate<String, FormObject> kafkaTemplate;
-
-
-
     public KafkaFormProducer(KafkaTemplate<String, FormObject> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }

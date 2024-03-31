@@ -1,3 +1,4 @@
+/*
 package com.KafkaBackend.KafkaService;
 
 import org.slf4j.Logger;
@@ -15,3 +16,4 @@ public class KafkaStringConsumer {
         LOGGER.info(String.format("\nMessage Received : \n%s",message));
     }
 }
+*/

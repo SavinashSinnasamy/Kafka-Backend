@@ -19,16 +19,17 @@ public class KafkaFormConsumer {
     public void getFormDetails(FormObject form) {
         String lowerCaseValue;
         boolean loop = true;
-        while (loop){
+        while (loop) {
+
             System.out.print("\nEnter Form ID : ");
             Scanner input = new Scanner(System.in);
             String idNo = input.next();
             if (idNo.equals(form.getFormId())) {
                 LOGGER.info(String.format("\n\n" +
-                                "\n===================================" +
-                                "\n\t\tApache Kafka Topic " +
-                                "\n===================================" +
-                                "\n%s", form.toString()));
+                        "\n===================================" +
+                        "\n\t\tApache Kafka Topic " +
+                        "\n===================================" +
+                        "\n%s", form.toString()));
                 System.out.println("===================================");
             } else {
                 System.out.println("No details provided, Check for the form Id and Try Again..");
@@ -36,14 +37,15 @@ public class KafkaFormConsumer {
             System.out.print("Do you need to view again ? (y/n) : ");
             String value = input.next();
             lowerCaseValue = value.toLowerCase();
-            if(lowerCaseValue.equals("n")){
+            if (lowerCaseValue.equals("n")) {
                 System.out.println("Kafka Topic server ended..");
                 loop = false;
 
-            } else if (!lowerCaseValue.equals("y")  ) {
+            } else if (!lowerCaseValue.equals("y")) {
                 System.out.println("Invalid Input, Try again..");
                 loop = false;
             }
         }
+
     }
 }
